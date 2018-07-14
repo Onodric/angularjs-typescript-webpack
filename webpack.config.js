@@ -9,11 +9,6 @@ module.exports = function (env) {
   const isProd = nodeEnv === 'production';
 
   const plugins = [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity,
-      filename: 'vendor.bundle.js'
-    }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: nodeEnv,
     }),
@@ -51,13 +46,14 @@ module.exports = function (env) {
   }
 
   return {
+    mode: 'development',
     devtool: isProd ? 'source-map' : 'eval',
     context: sourcePath,
     entry: {
       main: sourcePath + '/bootstrap.ts',
       vendor: [
         'angular/angular.js',
-        'angular-ui-router/release/angular-ui-router.js',
+        '@uirouter/angularjs/release/angular-ui-router.js',
         'angular-sanitize/angular-sanitize.js',
         'eventemitter3',
         'material-design-lite/material.css',

@@ -26,8 +26,8 @@ export class OAuth extends EventEmitter {
   constructor(private args: IGapiOAuthInitArgs = {}) {
     super();
     console.log('OAuth instantiated');
-    // Loads the client library and the auth2 library together for efficiency.
-    // Loading the auth2 library is optional here since `gapi.client.init` function will load
+    // loads the client library and the auth2 library together for efficiency.
+    // loading the auth2 library is optional here since `gapi.client.init` function will load
     // it if not already loaded. Loading it upfront can save one network request.
     gapi.load('client:auth2', () => this.initClient());
   }
@@ -45,22 +45,22 @@ export class OAuth extends EventEmitter {
   }
 
   private async initClient() {
-    // Initialize the client with API key and People API, and initialize OAuth with an
-    // OAuth 2.0 client ID and scopes (space delimited string) to request access.
+    // initialize the client with API key and People API, and initialize OAuth with an
+    // oAuth 2.0 client ID and scopes (space delimited string) to request access.
     try {
       await gapi.client.init(this.args);
-      // Listen for sign-in state changes.
+      // listen for sign-in state changes.
       gapi.auth2.getAuthInstance().isSignedIn.listen((val) => {
         this.updateSigninStatus(val);
       });
-      // Handle the initial sign-in state.
+      // handle the initial sign-in state.
       this.updateSigninStatus(this.isSignedIn());
     } catch (e) {
       console.error(e);
     }
   }
 
-  private updateSigninStatus(isSignedIn) {
+  private updateSigninStatus(isSignedIn: boolean) {
     this.emit('gapi.auth2.isSignedIn', isSignedIn);
     if (!isSignedIn) {
       this.signIn();
