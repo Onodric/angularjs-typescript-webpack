@@ -6,3 +6,4 @@ typings/
 tmp
 .DS_Store
 .idea
+.vs

@@ -7,7 +7,7 @@ import { TasksComponent } from './tasks/tasks.component';
 import { TaskComponent } from './task/task.component';
 
 @NgModule({
-  name: 'TasksModule',
+  id: 'TasksModule',
   declarations: [
     TaskManager,
     TasksListsComponent,
